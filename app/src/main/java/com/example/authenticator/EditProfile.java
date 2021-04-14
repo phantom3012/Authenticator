@@ -9,16 +9,18 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class EditProfile extends AppCompatActivity {
    // private static final String TAG = "TAG";
@@ -40,7 +42,7 @@ public class EditProfile extends AppCompatActivity {
         String fullName=data.getStringExtra("fullnametag");
         String email=data.getStringExtra("email");
         String hobbies=data.getStringExtra("hobbies");
-
+        System.out.println(fullName+" " + email+" " +hobbies);
         editfullName= findViewById(R.id.editfullname);
         editemailadd= findViewById(R.id.editemail);
         edithobbies= findViewById(R.id.edithobbies);
@@ -64,27 +66,19 @@ public class EditProfile extends AppCompatActivity {
                 progressBarEdit.setVisibility(View.VISIBLE);
                 if(up_fullName.isEmpty()||up_emailadd.isEmpty()||up_hobbies.isEmpty()){
                     Toast.makeText(EditProfile.this, "At least one field is blank!", Toast.LENGTH_SHORT).show();
+                    progressBarEdit.setVisibility(View.GONE);
                     return;
                 }
-                HashMap<String,Object> postValues=new HashMap<>();
-                postValues.put("fullName",up_fullName);
-                postValues.put("email",up_emailadd);
-                postValues.put("hobbies",up_hobbies);
-                dbr.child(UID).updateChildren(postValues).addOnSuccessListener(new OnSuccessListener<Void>() {
+                EditUser editUser=new EditUser(up_fullName,up_emailadd,up_hobbies);
+                Map<String,Object>postValues=editUser.toMap();
+                dbr.child(UID).updateChildren(postValues, new DatabaseReference.CompletionListener() {
                     @Override
-                    public void onSuccess(Void aVoid) {
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                        Toast.makeText(EditProfile.this, "Updated!", Toast.LENGTH_SHORT).show();
                         progressBarEdit.setVisibility(View.GONE);
-                        Toast.makeText(EditProfile.this, "Updated successfully!!", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(EditProfile.this,ProfileActivity.class));
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(EditProfile.this, "Could not update! The error: "+e.getMessage(), Toast.LENGTH_LONG).show();
-                        progressBarEdit.setVisibility(View.GONE);
-                    }
                 });
-
             }
         });
         //Log.i(TAG,"onCreate: "+fullName+" "+email+" "+hobbies );

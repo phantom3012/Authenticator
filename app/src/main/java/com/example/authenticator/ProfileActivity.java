@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+
 public class ProfileActivity extends AppCompatActivity {
     private Button logout;
     private FirebaseUser user;
@@ -44,11 +45,11 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        logout=(Button)findViewById(R.id.logout);
-        profileImage=(ImageView)findViewById(R.id.profileimage);
-        changeDp=(Button)findViewById(R.id.changedp);
-        changeProfile=(Button)findViewById(R.id.editprofilebutton);
-        progressBar=(ProgressBar)findViewById(R.id.checkloading);
+        logout= findViewById(R.id.logout);
+        profileImage= findViewById(R.id.profileimage);
+        changeDp= findViewById(R.id.changedp);
+        changeProfile= findViewById(R.id.editprofilebutton);
+        progressBar= findViewById(R.id.checkloading);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,9 +61,9 @@ public class ProfileActivity extends AppCompatActivity {
         reference= FirebaseDatabase.getInstance().getReference("Users");
         storageReference= FirebaseStorage.getInstance().getReference();
         userID=user.getUid();
-        TextView nameview=(TextView)findViewById(R.id.nameview);
-        TextView emailview=(TextView)findViewById(R.id.emailview);
-        TextView hobbiesview=(TextView)findViewById(R.id.hobbiesview);
+        TextView nameview= findViewById(R.id.nameview);
+        TextView emailview= findViewById(R.id.emailview);
+        TextView hobbiesview= findViewById(R.id.hobbiesview);
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
