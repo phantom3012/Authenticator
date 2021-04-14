@@ -11,7 +11,7 @@
         android:id="@+id/nameview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome, "
+        android:text="Welcome"
         android:textColor="#FFEA00"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,9 +22,8 @@
 
     <TextView
         android:id="@+id/emailview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="24dp"
-        android:textAlignment="viewEnd"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,11 +31,14 @@
         app:layout_constraintHorizontal_bias="0.223"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailtitle"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="30dp"
+        android:gravity="left"
         app:layout_constraintVertical_bias="0.02" />
 
     <TextView
         android:id="@+id/hobbiesview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:textColor="@color/white"
@@ -46,6 +48,8 @@
         app:layout_constraintHorizontal_bias="0.235"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hobbiestitle"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="30dp"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -70,10 +74,10 @@
         android:text="Log out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.922" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <TextView
         android:id="@+id/emailtitle"
@@ -134,10 +138,9 @@
         android:text="change profile picture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827" />
+        app:layout_constraintVertical_bias="0.976" />
 
     <ProgressBar
         android:id="@+id/checkloading"
@@ -151,4 +154,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.327" />
+
+    <Button
+        android:id="@+id/editprofilebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFEA00"
+        android:text="Edit profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.888" />
 </androidx.constraintlayout.widget.ConstraintLayout>

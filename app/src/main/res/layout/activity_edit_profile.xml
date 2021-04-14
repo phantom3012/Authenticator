@@ -5,29 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".RegisterUser">
+    tools:context=".EditProfile">
 
     <TextView
-        android:id="@+id/banner"
+        android:id="@+id/editprofilebanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Authenticator"
+        android:text="Edit  profile"
         android:textColor="#FFEA00"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
+        app:layout_constraintVertical_bias="0.086" />
 
     <EditText
-        android:id="@+id/fullname"
+        android:id="@+id/editfullname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="108dp"
         android:ems="10"
-        android:hint="Full Name"
+        android:hint="Enter new full name"
         android:inputType="textPersonName"
         android:textColor="#FFEA00"
         android:textColorHint="#FFEA00"
@@ -35,16 +35,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner"
+        app:layout_constraintTop_toBottomOf="@+id/editprofilebanner"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/emailregister"
+        android:id="@+id/editemail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="E-mail"
+        android:hint="Enter new email"
         android:inputType="textEmailAddress"
         android:textColor="#FFEA00"
         android:textColorHint="#FFEA00"
@@ -52,67 +51,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullname"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editfullname"
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <EditText
-        android:id="@+id/passwordregister"
+        android:id="@+id/edithobbies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textColor="#FFEA00"
-        android:textColorHint="#FFEA00"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailregister"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/hobbiesregister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Hobbies(,separated)"
+        android:hint="Enter new hobbie(s)"
         android:inputType="textPersonName"
         android:textColor="#FFEA00"
         android:textColorHint="#FFEA00"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordregister"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editemail"
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <Button
-        android:id="@+id/registeruser"
+        android:id="@+id/updatedetailsbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FFEA00"
-        android:text="Register User"
+        android:text="update details"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hobbiesregister"
-        app:layout_constraintVertical_bias="0.532" />
+        app:layout_constraintTop_toBottomOf="@+id/edithobbies" />
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/editprogress"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="520dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/updatedetailsbutton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner" />
+        app:layout_constraintTop_toBottomOf="@+id/edithobbies" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

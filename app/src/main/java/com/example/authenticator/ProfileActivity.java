@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference reference;
     private String userID;
     private ImageView profileImage;
-    private Button changeDp;
+    private Button changeDp,changeProfile;
     private StorageReference storageReference;
     private ProgressBar progressBar;
     @Override
@@ -48,6 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
         logout=(Button)findViewById(R.id.logout);
         profileImage=(ImageView)findViewById(R.id.profileimage);
         changeDp=(Button)findViewById(R.id.changedp);
+        changeProfile=(Button)findViewById(R.id.editprofilebutton);
         progressBar=(ProgressBar)findViewById(R.id.checkloading);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
                     String fullName=userprofile.fullName;
                     String email=userprofile.email;
                     String hobbies=userprofile.hobbies;
-                    nameview.setText("Welcome, "+fullName);
+                    nameview.setText(fullName);
                     emailview.setText(email);
                     hobbiesview.setText(hobbies);
                 }
@@ -96,6 +96,17 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i=new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i,1000);
+            }
+        });
+
+        changeProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(),EditProfile.class);
+                intent.putExtra("fullnametag",nameview.getText().toString());
+                intent.putExtra("email",emailview.getText().toString());
+                intent.putExtra("hobbies",hobbiesview.getText().toString());
+                startActivity(intent);
             }
         });
     }
@@ -134,7 +145,5 @@ public class ProfileActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
         });
-
-
     }
 }

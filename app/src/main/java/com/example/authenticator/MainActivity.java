@@ -73,12 +73,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this,ProfileActivity.class));
-                } else {
+                if (!task.isSuccessful()) {
                     Toast.makeText(MainActivity.this,"Failed to Login! Please check credentials",Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.GONE);
+                } else {
+                    startActivity(new Intent(MainActivity.this,ProfileActivity.class));
                 }
+                progressBar.setVisibility(View.GONE);
             }
         });
 
