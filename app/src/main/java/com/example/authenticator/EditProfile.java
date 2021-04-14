@@ -56,13 +56,12 @@ public class EditProfile extends AppCompatActivity {
         editemailadd.setText(email);
         edithobbies.setText(hobbies);
 
-        String up_fullName=editfullName.getText().toString();
-        String up_emailadd=editemailadd.getText().toString();
-        String up_hobbies=edithobbies.getText().toString();
-
         updatedeets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String up_fullName=editfullName.getText().toString();
+                String up_emailadd=editemailadd.getText().toString();
+                String up_hobbies=edithobbies.getText().toString();
                 progressBarEdit.setVisibility(View.VISIBLE);
                 if(up_fullName.isEmpty()||up_emailadd.isEmpty()||up_hobbies.isEmpty()){
                     Toast.makeText(EditProfile.this, "At least one field is blank!", Toast.LENGTH_SHORT).show();
