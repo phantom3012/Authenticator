@@ -5,9 +5,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.ResultReceiver;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -48,12 +52,13 @@ public class ProfileActivity extends AppCompatActivity {
     private String userID;
     private ImageView profileImage;
     private Button changeDp, changeProfile;
-    private TextView latitude,longitude;
+    private TextView latitude,longitude,address;
     private StorageReference storageReference;
     private ProgressBar progressBar;
     private AlertDialog.Builder builder;
     private AlertDialog alertDialog;
-    private String lat, lon;
+    private String lat, lon,userAddress="Loading...";
+    private ResultReceiver resultReceiver;
 
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
 
@@ -68,6 +73,8 @@ public class ProfileActivity extends AppCompatActivity {
         changeProfile = findViewById(R.id.editprofilebutton);
         progressBar = findViewById(R.id.checkloading);
         getLocation = findViewById(R.id.location);
+        resultReceiver=new AddressResultReceiver(new Handler());
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,6 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
         final View locationPopup = getLayoutInflater().inflate(R.layout.locationpopup, null);
         latitude = locationPopup.findViewById(R.id.latitude);
         longitude = locationPopup.findViewById(R.id.longitude);
+        address=locationPopup.findViewById(R.id.address);
 
         LocationRequest locationRequest = new LocationRequest();
         locationRequest.setInterval(10000);
@@ -164,6 +172,10 @@ public class ProfileActivity extends AppCompatActivity {
                     double longitude=locationResult.getLocations().get(latestLocationIndex).getLongitude();
                     lat=Double.toString(latitude);
                     lon=Double.toString(longitude);
+                    final Location location=new Location(LocationManager.NETWORK_PROVIDER);
+                    location.setLongitude(longitude);
+                    location.setLatitude(latitude);
+                    fetchAddressFromLatLong(location);
                 }
             }
         }, Looper.getMainLooper());
@@ -172,6 +184,7 @@ public class ProfileActivity extends AppCompatActivity {
         longitude= locationPopup.findViewById(R.id.longitude);
         latitude.setText("Latitude:"+lat);
         longitude.setText("Longitude:"+lon);
+        address.setText("Address: "+userAddress);
         builder.setView(locationPopup);
         alertDialog=builder.create();
         alertDialog.show();
@@ -213,6 +226,26 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void fetchAddressFromLatLong(Location location){
+        Intent intent=new Intent(this,FetchAddressIntentService.class);
+        intent.putExtra(Constants.RECEIVER,resultReceiver);
+        intent.putExtra(Constants.LOCATION_DATA_EXTRA,location);
+        startService(intent);
+    }
 
+    private class AddressResultReceiver extends ResultReceiver{
+         AddressResultReceiver(Handler handler){
+            super(handler);
+        }
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            super.onReceiveResult(resultCode, resultData);
+            if(resultCode==Constants.SUCCESS_RESULT){
+                userAddress=resultData.getString(Constants.RESULT_DATA_KEY);
+            } else {
+                Toast.makeText(ProfileActivity.this, resultData.getString(Constants.RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
 }
