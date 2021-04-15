@@ -3,6 +3,7 @@
     package="com.example.authenticator">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -10,8 +11,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Authenticator">
-        <activity android:name=".EditProfile"></activity>
+        android:theme="@style/Theme.Authenticator"
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".EditProfile" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".RegisterUser" />
         <activity android:name=".MainActivity">
